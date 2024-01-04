@@ -20,13 +20,22 @@ import net.javaguides.springboot.exception.ResourceNotFoundException;
 import net.javaguides.springboot.model.Employee;
 import net.javaguides.springboot.repository.EmployeeRepository;
 
-@CrossOrigin(origins = "http://viaduct.proxy.rlwy.net:50824/railway")
+@CrossOrigin(origins = "http://viaduct.proxy.rlwy.net:50824")
+
 @RestController
-@RequestMapping("/api/v1/")
+//@RequestMapping("/api/v1/")
+//@CrossOrigin(origins = "localhost:8080")
 public class EmployeeController 
 {
 	@Autowired
 	private EmployeeRepository employeeRepository;
+	
+	
+	@GetMapping({"/test"})
+	public String getStatus()
+	{
+		return "Application is up and running I think from testing";
+	}
 	
 	// get Employees
 	@GetMapping("/employees")
@@ -36,7 +45,7 @@ public class EmployeeController
 	}
 	
 	// create employee rest api
-	@PostMapping("/employees")
+	@PostMapping("/employee")
 	public Employee createEmployee(@RequestBody Employee employee) {
 		return employeeRepository.save(employee);
 	}
