@@ -18,9 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import net.javaguides.springboot.exception.ResourceNotFoundException;
 import net.javaguides.springboot.model.Employee;
+import net.javaguides.springboot.model.Lamp;
 import net.javaguides.springboot.repository.EmployeeRepository;
+import net.javaguides.springboot.repository.LampRepository;
 
-@CrossOrigin(origins = "http://viaduct.proxy.rlwy.net:50824")
+//@CrossOrigin(origins = "http://viaduct.proxy.rlwy.net:50824")
+@CrossOrigin(origins = "https://innocent-fuel-production.up.railway.app")
 
 @RestController
 //@RequestMapping("/api/v1/")
@@ -29,12 +32,19 @@ public class EmployeeController
 {
 	@Autowired
 	private EmployeeRepository employeeRepository;
-	
+	@Autowired
+	private LampRepository lampRepository;
 	
 	@GetMapping({"/test"})
 	public String getStatus()
 	{
 		return "Application is up and running I think from testing";
+	}
+	
+	@GetMapping("/lamps")
+	public List<Lamp> getAllLamp()
+	{
+		return this.lampRepository.findAll();
 	}
 	
 	// get Employees
